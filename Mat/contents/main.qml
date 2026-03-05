@@ -229,6 +229,12 @@ QQC2.Pane {
                             contentItem : Item {
                                 id: _area
 
+                                QQC2.Button {
+                                    text: "Lock"
+                                    checked: _padControl.lockValues
+                                    onClicked: _padControl.lockValues = !_padControl.lockValues
+                                }
+
 
                                 Rectangle {
                                     id: _dot
@@ -258,14 +264,37 @@ QQC2.Pane {
                                     yAxis.maximum: _area.height
                                     yAxis.minimum: 0
 
+                                    readonly property real xPos : _drag.centroid.position.x
+                                    readonly property real yPos : _drag.centroid.position.y
+
+                                    onXPosChanged: _area.updateValues()
+                                    onYPosChanged: _area.updateValues()
+
                                     onActiveChanged: {
-                                        if(!active)
-                                        {
-                                            _multiCutoffController.setValue((_drag.centroid.position.x/_area.width)*_multiCutoffController.to)
-                                            _multiResController.setValue((_drag.centroid.position.y/_area.height)*_multiResController.to)
-                                        }                                     
+                                        if(!active){
+                                             if(_padControl.lockValues){
+                                                _area.l_cp = _multiCutoffController.value
+                                                _area.l_rp = _multiResController.value
+                                            }else {
+                                                _multiCutoffController.setValue(_area.l_cp)
+                                                _multiResController.setValue(_area.l_rp)
+                                            }
+                                        }
                                     }
                                 }
+
+                                function updateValues(){
+
+                                    if(_drag.active){
+                                        _multiCutoffController.setValue((_drag.xPos/_area.width)*_multiCutoffController.to)
+                                        _multiResController.setValue((_drag.yPos/_area.height)*_multiResController.to)
+                                    }
+
+                                    
+                                }
+
+                                property int l_cp : _multiCutoffController.value_default
+                                property int l_rp : _multiResController.value_default
 
                                 property int cp : Math.round(((_multiCutoffController.value)/_multiCutoffController.to) * _area.width) 
                                 property int rp : Math.round(((_multiResController.value)/_multiResController.to) * _area.width) 
