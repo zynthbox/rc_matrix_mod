@@ -36,7 +36,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 
 QQC2.Pane {
     id: root
-
+    focus: true
     property bool debugMode: false
     readonly property string currentEngineId: zynqtgui.curlayerEngineId
     readonly property var selectedChannel: applicationWindow().selectedChannel
@@ -191,11 +191,17 @@ QQC2.Pane {
                     case "NAVIGATE_RIGHT":
                         return true;
                     case "KNOB0_UP":
+                        _multiResController.increaseValue()
                         return true;
                     case "KNOB0_DOWN":
+                        _multiResController.decreaseValue()
                         return true;
                     case "KNOB1_UP":
+                        _multiCutoffController.increaseValue()
+                        return true;
                     case "KNOB1_DOWN":
+                    _multiCutoffController.decreaseValue()
+                        return true;
                     case "KNOB2_UP":
                     case "KNOB2_DOWN":
                         return true;
