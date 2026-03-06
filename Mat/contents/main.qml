@@ -162,19 +162,7 @@ QQC2.Pane {
         padding: 10
 
         background: Item {
-            PlasmaCore.FrameSvgItem {
-                id: svgBg4
-
-                readonly property real leftPadding: fixedMargins.left
-                readonly property real rightPadding: fixedMargins.right
-                readonly property real topPadding: fixedMargins.top
-                readonly property real bottomPadding: fixedMargins.bottom
-
-                anchors.fill: parent
-                imagePath: "widgets/tracks-background"
-                colorGroup: PlasmaCore.Theme.ViewColorGroup
-            }
-
+            
         }
 
         contentItem: Loader {
@@ -368,6 +356,20 @@ QQC2.Pane {
                                     color: root.brightColor2
                                     radius: 10
                                     opacity: 0.7
+
+                                    QQC2.Label {
+                                        text: "-"
+                                        anchors.left: parent.left
+                                        anchors.top: parent.top
+                                        anchors.margins: Kirigami.Units.smallSpacing + 6
+                                    }
+
+                                    QQC2.Label {
+                                        text: "+"
+                                        anchors.right: parent.right
+                                        anchors.bottom: parent.bottom
+                                        anchors.margins: Kirigami.Units.smallSpacing + 6
+                                    }
 
                                     Item {
                                         anchors.fill: parent
