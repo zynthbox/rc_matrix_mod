@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/AudioControlMod">
+        <file>AudioControlMod/contents/main.qml</file>
+        <file>AudioControlMod/contents/WebView.qml</file>
+        <file>AudioControlMod/contents/MidiChannelTransport.qml</file>
+        <file>AudioControlMod/contents/helpers.js</file>
+        <file>jzz_webchannel.js</file>
+        <file>jzz.js</file>
+    </qresource>
+</RCC>
